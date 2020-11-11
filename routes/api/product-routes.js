@@ -13,7 +13,14 @@ router.get('/', (req, res) => {
         model: Category,
         attributes: ['id', 'category_name']
       },
-      // include tags information
+      {
+        model: Tag,
+        attributes: ['id', 'tag_name'],
+        include: {
+          model: ProductTag,
+          attributes: ['id', 'product_id', 'tag_id']
+        }
+      },
     ]
   })
     .then(dbProductData => res.json(dbProductData))
@@ -36,7 +43,14 @@ router.get('/:id', (req, res) => {
         model: Category,
         attributes: ['id', 'category_name']
       },
-      // include tag information
+      {
+        model: Tag,
+        attributes: ['id', 'tag_name'],
+        include: {
+          model: ProductTag,
+          attributes: ['id', 'product_id', 'tag_id']
+        }
+      },
     ]
   })
     .then(dbProductData => {
